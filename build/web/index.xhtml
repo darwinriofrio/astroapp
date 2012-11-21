@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head>
+        <f:facet name="first">
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>AstroApp</title>
+        </f:facet>
+    </h:head>
+
+    <h:body>
+        <f:view>
+            <p:layout fullPage="true"> 
+
+                <p:layoutUnit position="north" size="100" style="text-align:center" header="AstroApp: un proyecto de Ciencia Ciudadana" resizable="true" closable="true" collapsible="true" >
+                    <h:form>  
+                        <p:growl id="messages"/>  
+
+                        <p:menuButton value="Experiments Astronómicos">  
+                            <p:menuitem value="Quienes somos" update="messages" actionListener="#{buttonBean.save}" icon="ui-icon-disk"/>  
+                            <p:menuitem value="Donde estamos" update="messages" actionListener="#{buttonBean.update}" icon="ui-icon-arrowrefresh-1-w"/>  
+                            <p:menuitem value="Cerrar" icon="ui-icon-close" actionListener="#{buttonBean.delete}" ajax="false"/>  
+                            <p:separator />  
+                            <p:menuitem value="Otros proyectos" action="respuesta" icon="ui-icon-extlink"/>  
+                        </p:menuButton>  
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" resizable="true" closable="true" collapsible="true">
+                    Pie de página
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175">
+                    <h:form>
+                        <p:menu trigger="dynaButton" >
+                            <p:submenu label="Experimentos">
+                                <p:menuitem value="Experimento 1" action="respuesta"/>
+                                <p:menuitem value="Experimento 2" url="#" />
+                                <p:menuitem value="Experimento 3" url="#" />
+                                <p:menuitem value="Experimento 4" url="#" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                    <h:form>
+                        <p:menu trigger="dynaButton" >
+                            <p:submenu label="Observatorio">
+                                <p:menuitem value="Enlace 1" action="respuesta"/>
+                                <p:menuitem value="Enlace 2" url="#" />
+                                <p:menuitem value="Enlace 3" url="#" />
+                                <p:menuitem value="Enlace 4" url="#" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <p:accordionPanel>  
+                        <p:tab title="Ejemplo de consumir un servicio web a partir de su WSDL">
+                            <h:form>
+                                <p:panel id="panel" header="Conversor de divisas" style="margin-bottom:10px;">
+                                    <h:panelGrid columns="2" cellpadding="10" headerClass="conversor de divisas">
+                                        <f:facet name="header">
+                                            Conversor de divisas
+                                        </f:facet>
+                                        <h:outputText value="Importe: " />  
+                                        <p:inputText value="#{respuestaBean.valor}" />
+                                        <h:outputText value="De: " />  
+                                        <p:selectOneMenu value="#{respuestaBean.monedaA}">  
+                                            <f:selectItem itemLabel="EUR" itemValue="EUR" />
+                                            <f:selectItem itemLabel="USD" itemValue="USD" />    
+                                            <f:selectItem itemLabel="JPY" itemValue="JPY" />  
+                                            <f:selectItem itemLabel="CLP" itemValue="CLP" />  
+                                        </p:selectOneMenu>
+                                        <h:outputText value="a: " />  
+                                        <p:selectOneMenu value="#{respuestaBean.monedaB}">  
+                                            <f:selectItem itemLabel="USD" itemValue="USD" />  
+                                            <f:selectItem itemLabel="EUR" itemValue="EUR" />  
+                                            <f:selectItem itemLabel="JPY" itemValue="JPY" />  
+                                            <f:selectItem itemLabel="CLP" itemValue="CLP" />  
+                                        </p:selectOneMenu>
+                                        <h:outputText value="Resultado: " />
+                                        <h:outputText value="#{respuestaBean.resultado}" />
+                                        <h:outputText value=" " />
+                                        <p:commandButton value="Convertir" actionListener="#{respuestaBean.convertir}" ajax="false" />
+
+                                    </h:panelGrid>
+                                </p:panel>
+                            </h:form> 
+                        </p:tab>  
+                        <p:tab title="Ejemplo de utilización de la API de Facebook">
+                            <h:form>
+                                <h:inputText value="#{respuestaBean.nombre}" />
+                                <p:commandButton value="Mostrar" update="display"/>
+                                <h:outputText value="#{respuestaBean.nombre}" id="display" />
+                            </h:form>
+                            <h:panelGrid columns="2">  
+                                <p:graphicImage value="/images/galaxia.jpg" />  
+                                <h:outputText value="Un posible experimento es la clasificación de galaxias, es una tarea muy extensa para ser realizada por una sola persona, sin embargo con la ayuda de la Ciencia Ciudadana es posible!" />  
+                            </h:panelGrid>
+                            <h:form>
+                                <p:panel id="panel" header="Panel de ejemplo" style="margin-bottom:10px;">  
+                                    <p:messages id="messages" />  
+                                    <h:panelGrid columns="3">  
+                                        <h:outputLabel for="firstname" value="Firstname: *" />  
+                                        <p:inputText id="firstname"   
+                                                     value="#{pprBean.firstname}" required="true" label="Firstname">  
+                                            <f:validateLength minimum="2" />  
+                                        </p:inputText>  
+                                        <p:message for="firstname" />  
+
+                                        <h:outputLabel for="surname" value="Surname: *" />  
+                                        <p:inputText id="surname"   
+                                                     value="#{pprBean.surname}" required="true" label="Surname"/>  
+                                        <p:message for="surname" />  
+                                    </h:panelGrid>  
+                                </p:panel>
+                            </h:form>
+                        </p:tab>  
+                        <p:tab title="Ejemplo de uso Beans MVC">  
+                            <h:form>
+                                <p:messages/>
+                                <p:panel header="Escribir información">
+                                    <h:panelGrid columns="3">
+                                        <h:outputLabel value="Saludo: " for="saludo"/>
+                                        <h:selectOneMenu id="saludo" label="Saludo" 
+                                                         value="#{respuestaBean.saludo}" >
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItem itemLabel="Sr." itemValue="SR"/>
+                                            <f:selectItem itemLabel="Srs." itemValue="SRS"/>
+                                            <f:selectItem itemLabel="Srta." itemValue="SRTA"/>
+                                            <f:selectItem itemLabel="Sra." itemValue="SRA"/>
+                                            <f:selectItem itemLabel="Dr." itemValue="DR"/>
+                                        </h:selectOneMenu>
+                                        <h:message for="saludo"/>
+
+                                        <h:outputLabel value="Nombre" for="nombre"/>
+                                        <h:inputText id="nombre" label="Nombre" required="true" value="#{respuestaBean.nombre}"/>
+                                        <h:message for="nombre"/>
+
+                                        <h:outputLabel value="Apellios" for="apellidos"/>
+                                        <h:inputText id="apellidos" label="Apellidos" required="true" value="#{respuestaBean.apellidos}"/>
+                                        <h:message for="apellidos"/>
+
+                                        <h:outputLabel value="Edad" for="edad"/>
+                                        <h:inputText id="edad" label="Edad" required="true" value="#{respuestaBean.edad}"/>
+                                        <h:message for="edad"/>
+
+                                        <h:panelGroup/>
+                                        <h:commandButton value="Enviar" action="confirmacion" />
+
+                                    </h:panelGrid>
+                                </p:panel>
+                            </h:form> 
+                        </p:tab>  
+                    </p:accordionPanel>
+                </p:layoutUnit>
+
+            </p:layout>
+        </f:view>
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+    </h:body>
+
+
+</html>
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Página de confirmación</title>
+    </h:head>
+    <h:body>
+        <p:messages/>
+        <p:panel header="Confirmación">
+            <h:panelGrid columns="2" >
+                <h:outputText value="Saludo: "/>
+                <h:outputText value="#{respuestaBean.saludo}"/>
+
+                <h:outputText value="Nombre: "/>
+                <h:outputText value="#{respuestaBean.nombre}"/>
+
+                <h:outputText value="Apellidos: "/>
+                <h:outputText value="#{respuestaBean.apellidos}"/>
+
+                <h:outputText value="Edad: "/>
+                <h:outputText value="#{respuestaBean.edad}"/>
+            </h:panelGrid>
+        </p:panel>
+    </h:body>
+</html>
